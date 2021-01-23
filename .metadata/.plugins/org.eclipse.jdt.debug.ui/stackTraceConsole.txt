@@ -1,5 +1,0 @@
-//  if(this.senha == senha){
-//      return true;
-//  } else {
-//      return false;
-//  }

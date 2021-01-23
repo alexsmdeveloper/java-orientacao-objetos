@@ -1,9 +1,0 @@
-//não é necessário declarar que uma interface é abstrata. O compilador já entende
-//que se já é uma interface é abstrata
-public interface Tributavel {
-
-	//não pode ter atributos;
-	
-	public abstract double getValorDoImposto(double valor);
-	
-}
