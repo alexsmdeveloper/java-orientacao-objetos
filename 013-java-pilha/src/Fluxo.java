@@ -34,6 +34,7 @@ public class Fluxo {
 			
 			c.deposita();
 		}
+		
 		System.out.println("Fim do metodo2");
 	}
 }
