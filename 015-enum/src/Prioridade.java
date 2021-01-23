@@ -1,5 +1,5 @@
 /*
- * O Enum é uma classe com algumas caracteres especiais!
+ * O Enum é uma classe com algumas caracteres especiais!!
  * */
 
 public enum Prioridade {
