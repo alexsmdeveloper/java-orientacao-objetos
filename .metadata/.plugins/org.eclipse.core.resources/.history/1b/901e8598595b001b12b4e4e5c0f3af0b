@@ -1,0 +1,22 @@
+
+public class Cliente implements Autenticavel {
+
+	int senha;
+
+	@Override
+	public void setSenha(int senha) {
+		System.out.println("Cliente.autentica()");
+		this.senha = senha;
+	}
+
+	@Override
+	public boolean autentica(int senha) {
+		System.out.println("Cliente.autentica()");
+		if (this.senha == senha) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+}

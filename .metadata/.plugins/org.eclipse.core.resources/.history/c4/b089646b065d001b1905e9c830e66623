@@ -1,0 +1,19 @@
+
+public class TesteConexao {
+	
+	public static void main(String[] args) {
+		
+		System.out.println("inicio main...");
+		
+		try {
+		Conexao con = new Conexao();
+		con.leDados();
+		con.fecha();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("fim main.");
+	}
+
+}

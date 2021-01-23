@@ -1,0 +1,19 @@
+
+public class TestaEnum {
+	
+	public static void main(String[] args) {
+		
+		//Forma utilizar o Enum. É necessário apenas utilizar o valor da enumeração
+		//que se deseja!
+		Prioridade meuEnumMin = Prioridade.MIN;
+		Prioridade meuEnumNormal = Prioridade.NORMAL;
+		Prioridade meuEnumMax = Prioridade.MAX;
+		Prioridade meuEnumSuperMax = Prioridade.SUPERMAX;
+		
+		System.out.println("name()   =>" + meuEnumMin.name());
+		System.out.println("ordinal()=>" + meuEnumMin.ordinal());
+		
+		
+		
+	}
+}

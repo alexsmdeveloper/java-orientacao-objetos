@@ -1,0 +1,9 @@
+
+public class CalculadorImposto {
+	
+	private double valorImposto;
+	
+	public double calculaValor(double valor) {
+		return this.valorImposto = valor * 0.25;
+	}
+}

@@ -1,0 +1,21 @@
+
+//criando um contrato. Quem assinar esse contrato, está obrigado a implementar:
+// > setsenha
+// > autentica
+
+public abstract interface Autenticavel {
+
+	public void setSenha(int senha);
+//    public void setSenha(int senha){
+//        this.senha = senha;
+//    }
+
+	public boolean autentica(int senha);
+//    public boolean autentica(int senha){
+//        if(this.senha == senha){
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+}

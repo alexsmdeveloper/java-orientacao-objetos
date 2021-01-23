@@ -1,0 +1,17 @@
+/*
+ * O Enum é uma classe
+ * */
+
+public enum Prioridade {
+	
+	private int valor;
+	
+	//Definição dos valores da Enumeração
+	MIN(1), NORMAL(3), MAX(5), SUPERMAX(7);
+	
+	public Prioridade(int valor) {
+		this.valor = valor;
+	}
+	
+
+}

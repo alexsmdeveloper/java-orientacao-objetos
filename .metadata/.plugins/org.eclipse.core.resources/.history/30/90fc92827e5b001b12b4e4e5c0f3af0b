@@ -1,0 +1,7 @@
+
+public class CalculadorImposto {
+	
+	public double calculaValor(double valor) {
+		return valor * 0.25;
+	}
+}

@@ -1,0 +1,8 @@
+
+public abstract interface Tributavel {
+
+	//não pode ter atributos;
+	
+	public abstract double getValorDoImposto(double valor);
+	
+}

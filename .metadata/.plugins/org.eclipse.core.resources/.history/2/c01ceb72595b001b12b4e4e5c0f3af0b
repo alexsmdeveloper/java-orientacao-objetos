@@ -1,0 +1,33 @@
+
+public class TesteSistemaInterno {
+
+	public static void main(String[] args) {
+	
+		System.out.println("teste 1 polimorfismo!");
+		
+		Autenticavel referencia1 = new Gerente();//Polimorfismo
+		Autenticavel referencia2 = new Administrador(); //Polimorfismo
+		Autenticavel referencia3 = new Cliente(); //Polimorfismo
+		
+		System.out.println();
+		System.out.println("teste 2 polimorfismo!");
+		
+		Gerente g1 = new Gerente();
+		Autenticavel a1 = g1;
+		g1.setSenha(1234);
+		System.out.println("g1.getSenha() " + g1.getSenha());
+		a1.setSenha(4321);
+		System.out.println("g1.getSenha() " + g1.getSenha());
+		
+		
+//		referencia1.setSenha(2200);
+//		
+//		Gerente g = new Gerente();
+//		g.setSenha(222);
+//		
+//		SistemaInterno si = new SistemaInterno();
+//		si.autentica(g);
+		
+	}
+	
+}
