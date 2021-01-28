@@ -7,7 +7,7 @@ package br.com.bytebank.banco.modelo;
  * 
  * Representação de uma Conta Poupança. Conta Poupança é uma extensão de {@link Conta}.
  * 
- * @author alex
+ * @author Alex
  * @version 1.0.0
  */
 public class ContaPoupanca extends Conta {

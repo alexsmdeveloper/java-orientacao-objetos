@@ -4,6 +4,21 @@ import br.com.bytebank.banco.modelo.ContaCorrente;
 import br.com.bytebank.banco.modelo.SeguroVida;
 import br.com.bytebank.banco.modelo.Tributavel;
 
+/**
+ * Essa classe foi criada com o objtivo de demonstrar que uma interface
+ * pode ser utilizada como uma referência de um tipo mais genéric para um 
+ * tipo mais específico!, permitindo que seja utilizado o conceito de 
+ * Polimorfismo.<br><br>
+ * 
+ * Então você verá por exemplo que {@link ContaCorrente} é {@link Tributavel} e
+ * {@link Tributavel} é {@link ContaCorrente}.<br><br>
+ * 
+ * Você também verá que {@link SeguroVida} é {@link Tributavel} e {@link Tributavel}
+ * é {@link SeguroVida}
+ * 
+ * @author Alex
+ *
+ */
 public class TesteInterface2 {
 
 	public static void main(String[] args) {

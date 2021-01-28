@@ -4,6 +4,14 @@ import br.com.bytebank.banco.modelo.Conta;
 import br.com.bytebank.banco.modelo.ContaCorrente;
 import br.com.bytebank.banco.modelo.SaldoInsuficienteException;
 
+/**
+ * Essa classe tem  por objetivo demonstrar a utilização da minha própria Exception
+ * {@link SaldoInsuficienteException}, lançada através do método saca() da super
+ * Classe {@link Conta} e também do método saca() sobrescrito na classe filha {@link ContaCorrente}.
+ * 
+ * @author Alex
+ *
+ */
 public class TesteSaque {
 
 	//java.lang.String

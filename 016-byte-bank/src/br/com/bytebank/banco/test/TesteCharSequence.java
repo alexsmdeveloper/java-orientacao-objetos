@@ -1,5 +1,13 @@
 package br.com.bytebank.banco.test;
 
+
+/**
+ * Essa classe tem por objetivo demonstrar o polimorfismo entre o tipo
+ * {@link CharSequence} (Interface) e {@link String} (um tipo mais específico!)
+ * 
+ * @author Alex
+ *
+ */
 public class TesteCharSequence {
 
 	public static void main(String[] args) {

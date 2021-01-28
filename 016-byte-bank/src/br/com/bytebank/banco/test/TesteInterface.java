@@ -3,7 +3,16 @@ package br.com.bytebank.banco.test;
 import br.com.bytebank.banco.modelo.CalculadorImposto;
 import br.com.bytebank.banco.modelo.ContaCorrente;
 import br.com.bytebank.banco.modelo.SeguroVida;
+import br.com.bytebank.banco.modelo.Tributavel;
 
+/**
+ * Essa classe tem por objetivo demonstrar o Polimorfismo entre interface
+ * {@link Tributavel} (tipo mais genérico) e entre os tipos mais específicos
+ * {@link SeguroVida} e {@link ContaCorrente}.
+ * 
+ * @author Alex
+ *
+ */
 public class TesteInterface {
 
 	public static void main(String[] args) {

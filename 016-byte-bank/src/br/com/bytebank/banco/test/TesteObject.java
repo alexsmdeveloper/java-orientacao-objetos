@@ -4,6 +4,15 @@ import br.com.bytebank.banco.modelo.Cliente;
 import br.com.bytebank.banco.modelo.ContaCorrente;
 import br.com.bytebank.banco.modelo.ContaPoupanca;
 
+/**
+ * Essa classe tem por objetivo demonstrar a classe raiz do java: a Classe
+ * {@link Object}, do pacote java.lang.
+ * <br>
+ * Aqui é possível perceber também o conceito de Polimorfismo.
+ * 
+ * @author Alex
+ *
+ */
 public class TesteObject {
 
 	public static void main(String[] args) {

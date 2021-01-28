@@ -2,11 +2,13 @@ package br.com.bytebank.banco.test;
 
 /**
  * Esse classe tem o objetivo demonstrar as particularidades do tipo
- * String
- * @author alex
+ * {@link String}, que é uma classe do pacote java.lang. Também é visto a
+ * utilização de alguns métodos da Classe {@link String}.
+ * 
+ * 
+ * @author Alex
  *
  */
-
 public class TesteString {
 
 	public static void main(String[] args) {

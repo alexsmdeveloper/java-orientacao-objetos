@@ -4,6 +4,12 @@ import br.com.bytebank.banco.modelo.ContaCorrente;
 import br.com.bytebank.banco.modelo.ContaPoupanca;
 import br.com.bytebank.banco.modelo.SaldoInsuficienteException;
 
+/**
+ * Essa classe tem por objetivo demonstrar o conceito do Polimorfismo.
+ * 
+ * @author Alex
+ *
+ */
 public class TestePolimorfismo {
 
 	public static void main(String[] args) throws SaldoInsuficienteException{

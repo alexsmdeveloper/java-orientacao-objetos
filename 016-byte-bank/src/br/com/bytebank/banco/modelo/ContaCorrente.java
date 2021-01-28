@@ -6,7 +6,7 @@ package br.com.bytebank.banco.modelo;
  * 
  * Representação de uma Conta Corrente. Conta Corrente é uma extensão de {@link Conta}.
  * 
- * @author alex
+ * @author Alex
  * @version 1.0.0
  */
 public class ContaCorrente extends Conta implements Tributavel {

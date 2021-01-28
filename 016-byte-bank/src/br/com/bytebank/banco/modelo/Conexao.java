@@ -2,6 +2,12 @@ package br.com.bytebank.banco.modelo;
 //AutoCloseAble - Contrato que permite a classe
 //Fechar o recurso (objeto aberto) no try with resources!
 
+/**
+ * Classe para demonstração da implementação da interface {@link AutoCloseable}.
+ * 
+ * @author Alex
+ *
+ */
 public class Conexao implements AutoCloseable{
 
     public Conexao() {
@@ -20,6 +26,7 @@ public class Conexao implements AutoCloseable{
 	@Override
 	//public void close() throws Exception { //assinatura original da interface
 	public void close() { //você pode tirar o throws da assinatura de um método da interface sem problemas!
+		//faça sua própria implementação aqui!
 		System.out.println("Fechando conexao");
 		
 	}

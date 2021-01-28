@@ -2,7 +2,7 @@ package br.com.bytebank.banco.modelo;
 
 /**
  * Classe que representa um cliente.
- * @author alex
+ * @author Alex
  * @version 1.0.0
  */
 public class Cliente {

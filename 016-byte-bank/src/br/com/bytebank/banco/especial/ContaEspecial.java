@@ -9,7 +9,7 @@ import br.com.bytebank.banco.modelo.Conta;
  * esteja em outro pacote. Representação de uma Conta Especial. ContaEspecial é 
  * uma extensão de {@link Conta}.
  * 
- * @author alex
+ * @author Alex
  * @version 1.0.0
  */
 public class ContaEspecial extends Conta {

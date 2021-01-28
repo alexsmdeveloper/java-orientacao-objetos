@@ -5,7 +5,8 @@ package br.com.bytebank.banco.modelo;
  * Esta classe é uma abstração de conta. Serve de base para uma representação
  * de conta para as classes filhas que a utilizarem, por exemplo, ContaCorrente,
  * ContaEspecial, e outras...
- * @author alex
+ * 
+ * @author Alex
  * @version 1.0.0
  */
 
