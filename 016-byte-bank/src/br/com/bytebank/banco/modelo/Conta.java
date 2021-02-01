@@ -109,5 +109,24 @@ public abstract class Conta {
 		return "Agência: " + this.getAgencia() +
 				" Conta: " + this.getNumero();
 	}
+	
+	/**
+	 * Compara se duas contas são iguais!
+	 */
+	@Override
+	public boolean equals(Object ref){
+
+	    Conta outra = (Conta) ref;
+
+	    if(this.agencia != outra.agencia){
+	        return false;
+	    }
+
+	    if(this.numero != outra.numero){
+	        return false;
+	    }
+
+	    return true;
+	}
 
 }

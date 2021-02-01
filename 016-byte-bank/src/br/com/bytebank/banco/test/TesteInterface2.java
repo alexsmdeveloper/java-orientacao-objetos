@@ -25,7 +25,7 @@ public class TesteInterface2 {
 
 		//Tributável é uma interface.
 		Tributavel tributavelCC = new ContaCorrente(223, 7894);
-		Tributavel tributavelSV = new SeguroVida();
+		Tributavel tributavelSV = new SeguroVida();		
 		
 		System.out.println("Tributável é uma Inteface!");
 		System.out.println("Conta Corrente é Tributável e Seguro de Vida é Tributável!");
@@ -36,6 +36,15 @@ public class TesteInterface2 {
 		System.out.println("Quem implementou é uma interface!");
 		System.out.println();
 		System.out.println("Bem vindo ao Polimorfismo!");
+		
+		System.out.println("-------------------------------------------------");
+		ContaCorrente cc = (ContaCorrente)tributavelCC;
+		cc.deposita(100);
+		System.out.println("Referência Conta Corrente");
+		System.out.println("cc.getValorDoImposto()=" + cc.getValorDoImposto());
+		System.out.println();
+		System.out.println("Interface");
+		System.out.println("tributavelCC.getValorDoImposto()=" + tributavelCC.getValorDoImposto());
 	}
 
 }
