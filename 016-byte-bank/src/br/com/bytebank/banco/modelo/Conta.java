@@ -12,8 +12,10 @@ package br.com.bytebank.banco.modelo;
 
 //classe abstrata. Dessa forma Conta não pode ser instanciada. Com isso, apenas faz sentido instanciar uma ContaCorrente
 //ou uma ContaPoupanca!
-public abstract class Conta {
-
+public abstract class Conta implements Comparable<Conta> {
+									  //Nossa Classe é comparável!	
+	
+	
 	// encapsulando os atributos *private
 	protected double saldo;
 	private int agencia;
@@ -107,7 +109,8 @@ public abstract class Conta {
 	@Override
 	public String toString() {
 		return "Agência: " + this.getAgencia() +
-				" Conta: " + this.getNumero();
+				" Conta: " + this.getNumero() +
+				" Saldo: " + this.getSaldo();
 	}
 	
 	/**
@@ -127,6 +130,17 @@ public abstract class Conta {
 	    }
 
 	    return true;
+	}
+	
+	/**
+	 * Definindo a ordem Natural da classe sobrescrevendo
+	 * o método compareTo da Classe java.lang.Comparable
+	 * 
+	 * Para efeitos didáticos, a ordem natural da Conta é o Saldo.
+	 */
+	@Override
+	public int compareTo(Conta outraConta) {
+		return Double.compare(this.saldo, outraConta.saldo);
 	}
 
 }
