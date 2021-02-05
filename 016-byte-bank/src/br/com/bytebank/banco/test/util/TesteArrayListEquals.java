@@ -23,10 +23,10 @@ public class TesteArrayListEquals {
 
 		Conta cc = new ContaCorrente(121, 1241);
 		Conta cc2 = new ContaCorrente(121, 1241);
-		
+				
 		lista.add(cc);
 		
-		System.out.println("lista.contains(cc2)=" + lista.contains(cc2));
+		System.out.println("lista.contains(cc2)=" + lista.contains(cc2));		
 		
 		System.out.println("lista.equals(cc2)=" + lista.equals(cc2)); 
 

@@ -1,4 +1,4 @@
-package br.com.bytebank.banco.modelo;
+package br.com.alura.java.io.teste;
 
 import java.io.Serializable;
 
@@ -8,15 +8,14 @@ import java.io.Serializable;
  * @version 1.0.0
  */
 public class Cliente implements Serializable{
-	
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3L;
 	private String nome;
 	private String cpf;
-	private transient String profissao; //transient indica que esse atributo não deve ser serializado!
+	private String profissao;
+	////////////////////////public static String tipoCliente;
 	
 	public String getNome() {
 		return this.nome;

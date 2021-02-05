@@ -53,7 +53,7 @@ public class TesteCharSequence {
 		
 		System.out.println(nome.substring(2, 3));
 
-		//nome = nome.replace("UR", cs);
+		nome = nome.replace("UR", cs);
 		System.out.println(nome);
 
 	}

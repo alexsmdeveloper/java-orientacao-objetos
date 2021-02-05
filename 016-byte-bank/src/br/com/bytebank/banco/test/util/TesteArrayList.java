@@ -77,7 +77,6 @@ public class TesteArrayList {
 		ArrayList novalista = new ArrayList(top10Clientes);
 		System.out.println(novalista.size());
 		
-		
 
 	}
 

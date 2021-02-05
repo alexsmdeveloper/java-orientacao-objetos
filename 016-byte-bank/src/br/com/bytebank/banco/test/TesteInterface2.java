@@ -5,8 +5,8 @@ import br.com.bytebank.banco.modelo.SeguroVida;
 import br.com.bytebank.banco.modelo.Tributavel;
 
 /**
- * Essa classe foi criada com o objtivo de demonstrar que uma interface
- * pode ser utilizada como uma referência de um tipo mais genéric para um 
+ * Essa classe foi criada com o objetivo de demonstrar que uma interface
+ * pode ser utilizada como uma referência de um tipo mais genérico para um 
  * tipo mais específico!, permitindo que seja utilizado o conceito de 
  * Polimorfismo.<br><br>
  * 

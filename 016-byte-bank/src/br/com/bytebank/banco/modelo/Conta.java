@@ -1,5 +1,7 @@
 package br.com.bytebank.banco.modelo;
 
+import java.io.Serializable;
+
 /**
  * 
  * Esta classe é uma abstração de conta. Serve de base para uma representação
@@ -12,10 +14,14 @@ package br.com.bytebank.banco.modelo;
 
 //classe abstrata. Dessa forma Conta não pode ser instanciada. Com isso, apenas faz sentido instanciar uma ContaCorrente
 //ou uma ContaPoupanca!
-public abstract class Conta implements Comparable<Conta> {
+public abstract class Conta implements Comparable<Conta>, Serializable{
 									  //Nossa Classe é comparável!	
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// encapsulando os atributos *private
 	protected double saldo;
 	private int agencia;

@@ -1,0 +1,7 @@
+Vamos ao primeiro
+Teste
+do
+Programa
+que vai ler a entrada do teclado
+E
+Escrever um arquivo
