@@ -46,6 +46,7 @@ public class Aluno {
 	 */
 	@Override
 	public boolean equals(Object obj) {
+		System.out.println("Aluno.equals()");
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -64,10 +65,11 @@ public class Aluno {
 	}
 	
 	/**
-	 * É uma boa prática sobrescrever esse méto a sobrescrever o método equals
+	 * É uma boa prática sobrescrever esse méto a sobrescrever o método hashCode
 	 */
 	@Override
 	public int hashCode() {
+		System.out.println("Aluno.hashCode()");
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());

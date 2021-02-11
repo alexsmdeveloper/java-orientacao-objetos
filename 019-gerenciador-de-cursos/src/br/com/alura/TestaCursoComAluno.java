@@ -34,7 +34,7 @@ public class TestaCursoComAluno {
 		cursoJavaColecoes.matricula(a2);
 		cursoJavaColecoes.matricula(a3);
 		cursoJavaColecoes.matricula(a4);
-		cursoJavaColecoes.matricula(a5); //não permite adicionar (hashCode)
+		//cursoJavaColecoes.matricula(a5); //não permite adicionar (hashCode)
 		
 		System.out.println(cursoJavaColecoes.getAulas());
 		System.out.println(cursoJavaColecoes.getAlunos().size());
