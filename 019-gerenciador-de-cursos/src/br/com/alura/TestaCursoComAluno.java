@@ -56,12 +56,19 @@ public class TestaCursoComAluno {
 		
 		
 		//Verificando se já contém no nosso set de alunos do Curso o Aluno a6
-		System.out.println("Existe o aluno Jorge Lucas ?=" +
-							cursoJavaColecoes.getAlunos().contains(a5));
-		System.out.println("Existe o aluno Jorge Lucas ?=" +
-				cursoJavaColecoes.getAlunos().contains(a6));
+		System.out.println("Existe o aluno " + a5.getNome() + " ?=" +
+							cursoJavaColecoes.estaMatriculado(a5));
+		System.out.println("Existe o aluno " + a6.getNome() + " ?=" +
+				cursoJavaColecoes.estaMatriculado(a6));
 		
 		
+		//**************************************************************
+		//**************************************************************
+		//Utilizando o método que verifica se o aluno está matriculado pela matrícula
+		System.out.println();
+		System.out.println("Busca matriculado pela matrícula!");
+		System.out.println(a7.getNome() + " está matriculado ?= " + cursoJavaColecoes.buscaMatriculado(a7.getNumeroMatricula()) + ".");
+		System.out.println(a2.getNome() + " está matriculado ?= " + cursoJavaColecoes.buscaMatriculado(a2.getNumeroMatricula()) + ".");
 		
 		
 		

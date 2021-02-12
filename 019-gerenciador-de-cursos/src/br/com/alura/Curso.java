@@ -74,6 +74,11 @@ public class Curso {
 		this.matriculaParaAluno.put(aluno.getNumeroMatricula(), aluno);
 	}
 	
+	/**
+	 * Busca no mapa se já existe a mátricula. Aqui a busca é por um atributo da classe.
+	 * @param matricula
+	 * @return Aluno
+	 */
 	public Aluno buscaMatriculado(int matricula) {
 		if (matricula <= 0) {
 			throw new NoSuchElementException("Matrícula não informada!");
@@ -85,7 +90,11 @@ public class Curso {
 		return Collections.unmodifiableSet(this.alunos);
 	}
 	
-	
+	/**
+	 * Verifica no conjunto se existe alguém com o mesmo hashcodé, já que alunos é um Set..
+	 * @param aluno
+	 * @return boolean, onde true está matriculado e false não está matriculado.
+	 */
 	public boolean estaMatriculado(Aluno aluno) {
 		System.out.println("Classe Curso:estaMatriculado()");
 		return this.alunos.contains(aluno);
