@@ -2,7 +2,6 @@ package br.com.caelum.leilao.servico;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import br.com.caelum.leilao.dominio.Lance;
@@ -24,7 +23,7 @@ public class Avaliador {
 	
 	public Avaliador() {
 		
-		System.out.println("Iniciando Avalidor....");
+		System.out.println("Iniciando Avaliador....");
 		System.out.println("maiorDeTodos=" + maiorDeTodos);
 		
 		if (maiorDeTodos > 0) System.out.println("Maior de Todos maior que zero");
@@ -42,6 +41,10 @@ public class Avaliador {
 	}
 
 	public void avalia(Leilao leilao) {
+		
+		if (leilao.getLances().size() == 0) {
+			throw new RuntimeException("Não é possível avaliar Leilão sem lances!");
+		}
 		
 		//vamos percorrer todos os lances desse leilão e procurar pelo maior valor
 		for (Lance lance : leilao.getLances()) {

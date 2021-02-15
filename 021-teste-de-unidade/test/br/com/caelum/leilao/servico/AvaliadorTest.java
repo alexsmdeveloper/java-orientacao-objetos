@@ -1,11 +1,18 @@
 package br.com.caelum.leilao.servico;
 
 import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 import java.util.List;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import br.com.caelum.leilao.builder.CriadorDeLeilao;
 import br.com.caelum.leilao.dominio.Lance;
 import br.com.caelum.leilao.dominio.Leilao;
 import br.com.caelum.leilao.dominio.Usuario;
@@ -23,29 +30,79 @@ import br.com.caelum.leilao.dominio.Usuario;
  *
  */
 public class AvaliadorTest {
+	
+	private Avaliador leiloeiro;
+	private Usuario joao;
+	private Usuario maria;
+	private Usuario jose;
 
-	@Test // notação necessária para indicar ao JUnit que quero testar esse método
+	/**
+	 * @Before  Sempre executado antes pelo JUnit. Algo comum a todos os métodos!
+	 */
+	@Before  
+	public void setUp() {
+		this.leiloeiro = new Avaliador();		
+		this.joao = new Usuario("João");
+		this.maria = new Usuario("Maria");
+		this.jose = new Usuario("José");
+		System.out.println("Iniciando Testes!!");
+	}
+	
+	/**
+	 * Utilizamos métodos @After quando nossos testes consomem 
+	 * recursos que precisam ser finalizados. Exemplos podem ser 
+	 * testes que acessam banco de dados, abrem arquivos, abrem sockets, e etc.
+	 */
+	@After //O JUnit roda no final de cada teste!
+	public void finaliza() {
+		System.out.println("Fim do Teste");
+		System.out.println("*************************************");
+	}
+	
+	/**
+	 * Métodos anotados com @BeforeClass são executados apenas uma vez,
+	 * antes de todos os métodos de teste.
+	 * Bastante úteis quando temos algum recurso que precisa ser inicializado 
+	 * apenas uma vez e que pode ser consumido por todos os métodos de teste
+	 *  sem a necessidade de ser reinicializado.
+	 */
+	
+	@BeforeClass
+	public static void testandoBeforeClass() {
+	  System.out.println("**Executado antes de todos os métodos classe");
+	}
+	
+	/**
+	 * O método anotado com @AfterClass, por sua vez, é executado uma vez,
+	 * após a execução do último método de teste da classe.
+	 */
+	@AfterClass
+	public static void testandoAfterClass() {
+	  System.out.println("**Depois de todos os métodos da classe!");
+	}
+	
+	//melhorando o código. Algo que é comum a todos os métodos
+	
+
+	// @Test notação necessária para indicar ao JUnit que quero testar esse método
 	// public static void main(String[] args) { //o método não pode ser static nem
 	// receber argumentos!
 	
 	/**
 	 * Verifica o maior e menor lance
 	 */
+	@Test
 	public void deveEntenderLancesEmOrdemCrescente() {
 
 		// cenário 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-		Usuario maria = new Usuario("Maria");
-		Usuario jose = new Usuario("José");
-
-		Leilao leilao = new Leilao("Play Station 3 novo");
-
-		leilao.propoe(new Lance(joao, 250.0));
-		leilao.propoe(new Lance(jose, 300.0));
-		leilao.propoe(new Lance(maria, 400.0));
+		Leilao leilao = new CriadorDeLeilao().para("Play Station 3 novo")
+						.lance(joao, 250.0)
+						.lance(jose, 300.0)
+						.lance(maria, 400.0)
+						.constroi();
 
 		// ação
-		Avaliador leiloeiro = new Avaliador();
+		//Avaliador leiloeiro = new Avaliador();//não necessário, código melhorado!
 		leiloeiro.avalia(leilao);
 
 		// comparando a saída com o esperado
@@ -87,10 +144,17 @@ public class AvaliadorTest {
 		// Assert.assertEquals(menorEsperado, leiloeiro.getMenorLance()); !!ERRADO!!
 		// Assert.assertEquals(maiorEsperado, leiloeiro.getMaiorLance()); !!ERRADO!!
 
-		assertEquals(menorEsperado, leiloeiro.getMenorLance(), 0.00001);
-		assertEquals(maiorEsperado, leiloeiro.getMaiorLance(), 0.00001);
+		
+		////assertEquals(menorEsperado, leiloeiro.getMenorLance(), 0.00001);
+		////assertEquals(maiorEsperado, leiloeiro.getMaiorLance(), 0.00001);
+		
+		//Substituindo pelo assertThat da biblioteca do Hamcrest.
+		assertThat(leiloeiro.getMenorLance(), equalTo(menorEsperado));
+		assertThat(leiloeiro.getMaiorLance(), equalTo(maiorEsperado));
+		
+		
 
-	}
+	}	
 
 	/**
 	 * Atestar a media dos lances
@@ -99,18 +163,13 @@ public class AvaliadorTest {
 	public void deveCalcularAMedia() {
 
 		// cenário 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-		Usuario maria = new Usuario("Maria");
-		Usuario jose = new Usuario("José");
+		Leilao leilao = new CriadorDeLeilao().para("Play Station 3 novo")
+							.lance(joao, 250.0)
+							.lance(jose, 300.0)
+							.lance(maria, 400.0)
+							.constroi();
 
-		Leilao leilao = new Leilao("Play Station 3 novo");
-
-		leilao.propoe(new Lance(joao, 250.0));
-		leilao.propoe(new Lance(jose, 300.0));
-		leilao.propoe(new Lance(maria, 400.0));
-
-		// ação
-		Avaliador leiloeiro = new Avaliador();
+		//Avaliador leiloeiro = new Avaliador();//não necessário, código melhorado!
 		leiloeiro.avalia(leilao);
 
 		// Calcular a Media
@@ -120,25 +179,22 @@ public class AvaliadorTest {
 
 	/**
 	 * Atestar a media com zero lances no leilão.
+	 * Teste inválido. Nova regra não é permitido avaliar leilão sem lances!
 	 */
-	@Test
-	public void deveEntenderAMediaComZeroLance() {
-
-		// cenário 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-		Usuario maria = new Usuario("Maria");
-		Usuario jose = new Usuario("José");
-
-		Leilao leilao = new Leilao("Play Station 3 novo");
-
-		// ação
-		Avaliador leiloeiro = new Avaliador();
-		leiloeiro.avalia(leilao);
-
-		// Avaliar a saida
-		double mediaEsperada = 0.0;
-		assertEquals(mediaEsperada, leiloeiro.getMediaLances(), 0.000001);
-	}
+//	@Test
+//	public void deveEntenderAMediaComZeroLance() {
+//
+//		// cenário 3 lances em ordem crescente
+//		Leilao leilao = new CriadorDeLeilao().para("Play Station 3 novo").constroi();
+//
+//		// ação
+//		//Avaliador leiloeiro = new Avaliador();//não necessário, código melhorado!
+//		leiloeiro.avalia(leilao);
+//
+//		// Avaliar a saida
+//		double mediaEsperada = 0.0;
+//		assertEquals(mediaEsperada, leiloeiro.getMediaLances(), 0.000001);
+//	}
 
 	/**
 	 * Atestar o maior lance e menor lance de um leilão que contenha apenas
@@ -148,14 +204,12 @@ public class AvaliadorTest {
 	public void deveEntenderLeilaoComApenasUmLance() {
 
 		// cenário 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-
-		Leilao leilao = new Leilao("Play Station 3 novo");
-
-		leilao.propoe(new Lance(joao, 1000.0));
+		Leilao leilao = new CriadorDeLeilao().para("Play Station 3 novo")
+							.lance(joao, 1000.0)
+							.constroi();
 
 		// ação
-		Avaliador leiloeiro = new Avaliador();
+		//Avaliador leiloeiro = new Avaliador();//não necessário, código melhorado!
 		leiloeiro.avalia(leilao);
 		
 		//verificar a saida
@@ -173,21 +227,17 @@ public class AvaliadorTest {
 
 		// cenário 3 lances em ordem crescente
 		// cenário 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-		Usuario maria = new Usuario("Maria");
-		Usuario jose = new Usuario("José");
-
-		Leilao leilao = new Leilao("Play Station 3 novo");
-
-		leilao.propoe(new Lance(joao, 200.0));
-		leilao.propoe(new Lance(maria, 450.0));
-		leilao.propoe(new Lance(jose, 120.0));
-		leilao.propoe(new Lance(joao, 700.0));
-		leilao.propoe(new Lance(maria, 630.0));
-		leilao.propoe(new Lance(jose, 330.0));
+		Leilao leilao = new CriadorDeLeilao().para("Play Station 3 novo")
+							.lance(joao, 200.0)
+							.lance(maria, 450.0)
+							.lance(jose, 120.0)
+							.lance(joao, 700.0)
+							.lance(maria, 630.0)
+							.lance(jose, 330.0)
+							.constroi();
 
 		// ação
-		Avaliador leiloeiro = new Avaliador();
+		//Avaliador leiloeiro = new Avaliador();//não necessário, código melhorado!
 		leiloeiro.avalia(leilao);
 
 		// Testar a média //valores informados no lance
@@ -207,20 +257,16 @@ public class AvaliadorTest {
 	public void deveEntenderLeilaoComLancesEmOrdemDecrescente() {
 
 		// cenário 3 lances em ordem crescente
-		// cenário 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-		Usuario maria = new Usuario("Maria");
-		Usuario jose = new Usuario("José");
 
-		Leilao leilao = new Leilao("Play Station 3 novo");
-
-		leilao.propoe(new Lance(joao, 400.0));
-		leilao.propoe(new Lance(maria, 300.0));
-		leilao.propoe(new Lance(jose, 200.0));
-		leilao.propoe(new Lance(joao, 100.0));		
+		Leilao leilao = new CriadorDeLeilao().para("Play Station 3 novo")
+				.lance(joao, 400.0)
+				.lance(maria, 300.0)
+				.lance(jose, 200.0)
+				.lance(joao, 100.0)
+				.constroi();
 
 		// ação
-		Avaliador leiloeiro = new Avaliador();
+		//Avaliador leiloeiro = new Avaliador();//não necessário, código melhorado!
 		leiloeiro.avalia(leilao);
 
 		// Testar a média //valores informados no lance
@@ -239,20 +285,16 @@ public class AvaliadorTest {
 
 		// cenário 3 lances em ordem crescente
 		// cenário 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-		Usuario maria = new Usuario("Maria");
-		Usuario jose = new Usuario("José");
-
-		Leilao leilao = new Leilao("Play Station 3 novo");
-
-		leilao.propoe(new Lance(jose, 200.0));
-		leilao.propoe(new Lance(joao, 400.0));
-		leilao.propoe(new Lance(maria, 300.0));		
-		leilao.propoe(new Lance(joao, 100.0));	
-		leilao.propoe(new Lance(jose, 500.0));
+		Leilao leilao = new CriadorDeLeilao().para("Play Station 3 novo")
+						.lance(jose, 200.0)
+						.lance(joao, 400.0)
+						.lance(maria, 300.0)		
+						.lance(joao, 100.0)	
+						.lance(jose, 500.0)
+						.constroi();
 
 		// ação
-		Avaliador leiloeiro = new Avaliador();
+		//Avaliador leiloeiro = new Avaliador();//não necessário, código melhorado!
 		leiloeiro.avalia(leilao);
 		List<Lance> tresMaiores = leiloeiro.getTresMaiores();
 
@@ -278,17 +320,13 @@ public class AvaliadorTest {
 
 		// cenário 3 lances em ordem crescente
 		// cenário 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-		Usuario maria = new Usuario("Maria");
-		Usuario jose = new Usuario("José");
-
-		Leilao leilao = new Leilao("Play Station 3 novo");
-
-		leilao.propoe(new Lance(jose, 200.0));
-		leilao.propoe(new Lance(joao, 400.0));
+		Leilao leilao = new CriadorDeLeilao().para("Play Station 3 novo")
+							.lance(jose, 200.0)
+							.lance(joao, 400.0)
+							.constroi();
 
 		// ação
-		Avaliador leiloeiro = new Avaliador();
+		//Avaliador leiloeiro = new Avaliador();//não necessário, código melhorado!
 		leiloeiro.avalia(leilao);
 		List<Lance> tresMaiores = leiloeiro.getTresMaiores();
 
@@ -304,30 +342,42 @@ public class AvaliadorTest {
 	}
 	
 	/**
-	 * Um leilão sem nenhum lance, devolve lista vazia
+	 * Um leilão sem nenhum lance, devolve lista vazia.
+	 * Teste fora do escopo. Nova regra, não é possível avaliar leilão sem lance!
 	 */
-	@Test
-	public void deveDevolverListaVaziaCasoNaoHajaLances() {
-
-		// cenário 3 lances em ordem crescente
-		// cenário 3 lances em ordem crescente
-		Usuario joao = new Usuario("João");
-		Usuario maria = new Usuario("Maria");
-		Usuario jose = new Usuario("José");
-
-		Leilao leilao = new Leilao("Play Station 3 novo");
-
-		// ação
-		Avaliador leiloeiro = new Avaliador();
+//	@Test
+//	public void deveDevolverListaVaziaCasoNaoHajaLances() {
+//
+//		// cenário 3 lances em ordem crescente
+//		// cenário 3 lances em ordem crescente
+//		Leilao leilao = new CriadorDeLeilao().para("Play Station 3 novo").constroi();
+//
+//		// ação
+//		//Avaliador leiloeiro = new Avaliador();//não necessário, código melhorado!
+//		leiloeiro.avalia(leilao);
+//		List<Lance> tresMaiores = leiloeiro.getTresMaiores();
+//
+//		// Averiguar Teste
+//
+//		int quantidadeItensEsperado = 0;
+//		
+//		assertEquals(quantidadeItensEsperado, tresMaiores.size());
+//
+//	}
+	
+	
+	/**
+	 * Testes com exceção. No caso é esperado que um leilão sem lances não seja avaliado, retornando uma exceção.
+	 * 
+	 */
+	@Test(expected = RuntimeException.class) //(JUnit 4.0 > )Notação para testar exceção. Se não fosse utilizada você poderia utilizar o try-catch.
+	public void naoDeveAvaliarLeiloesSemNenhumLanceDado() {
+		//cenário
+		Leilao leilao = new CriadorDeLeilao().para("tablet XZ2 128Core").constroi();
+		//ação
 		leiloeiro.avalia(leilao);
-		List<Lance> tresMaiores = leiloeiro.getTresMaiores();
-
-		// Averiguar Teste
-
-		int quantidadeItensEsperado = 0;
 		
-		assertEquals(quantidadeItensEsperado, tresMaiores.size());
-
 	}
+	
 
 }
