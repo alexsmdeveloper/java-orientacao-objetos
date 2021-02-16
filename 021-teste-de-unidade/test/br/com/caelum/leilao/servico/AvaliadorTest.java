@@ -1,8 +1,11 @@
 package br.com.caelum.leilao.servico;
 
-import static org.junit.Assert.assertEquals;
+import static br.com.caelum.leilao.my.matcher.LeilaoMatcher.temOLance;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItems;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -174,7 +177,8 @@ public class AvaliadorTest {
 
 		// Calcular a Media
 		double mediaEsperada = (250 + 300 + 400) / 3.0;
-		assertEquals(mediaEsperada, leiloeiro.getMediaLances(), 0.000001);
+		//assertEquals(mediaEsperada, leiloeiro.getMediaLances(), 0.000001);
+		assertThat(leiloeiro.getMediaLances(), equalTo(mediaEsperada));
 	}
 
 	/**
@@ -203,19 +207,26 @@ public class AvaliadorTest {
 	@Test
 	public void deveEntenderLeilaoComApenasUmLance() {
 
+		Lance lanceDoJoao = new Lance(joao, 1000.0);
+		Lance lanceDaMaria = new Lance(maria, 2500.0);
+		
 		// cenário 3 lances em ordem crescente
-		Leilao leilao = new CriadorDeLeilao().para("Play Station 3 novo")
-							.lance(joao, 1000.0)
-							.constroi();
-
+		Leilao leilao = new Leilao("Play Station 3 novo");
+		leilao.propoe(lanceDoJoao);					
+		
 		// ação
 		//Avaliador leiloeiro = new Avaliador();//não necessário, código melhorado!
 		leiloeiro.avalia(leilao);
 		
 		//verificar a saida
-		double valorEsperada = 1000.0;
-		assertEquals(valorEsperada, leiloeiro.getMenorLance(), 0.000001);
-		assertEquals(valorEsperada, leiloeiro.getMaiorLance(), 0.000001);
+		double valorEsperado = 1000.0;
+		//assertEquals(valorEsperada, leiloeiro.getMenorLance(), 0.000001);
+		//assertEquals(valorEsperada, leiloeiro.getMaiorLance(), 0.000001);
+		assertThat(leiloeiro.getMenorLance(), equalTo(valorEsperado));
+		assertThat(leiloeiro.getMaiorLance(), equalTo(valorEsperado));
+		//meu Matcher!
+		assertThat(leilao, temOLance(lanceDoJoao));//DEVE PASSAR!
+		assertThat(leilao, temOLance(lanceDaMaria));//DEVE FALHAR!
 	}
 
 	/**
@@ -243,8 +254,10 @@ public class AvaliadorTest {
 		// Testar a média //valores informados no lance
 		double menorEsperado = 120.0;
 		double maiorEsperado = 700.0;
-		assertEquals(menorEsperado, leiloeiro.getMenorLance(), 0.00001);
-		assertEquals(maiorEsperado, leiloeiro.getMaiorLance(), 0.00001);
+		//assertEquals(menorEsperado, leiloeiro.getMenorLance(), 0.00001);
+		//assertEquals(maiorEsperado, leiloeiro.getMaiorLance(), 0.00001);
+		assertThat(leiloeiro.getMenorLance(), equalTo(menorEsperado));
+		assertThat(leiloeiro.getMaiorLance(), equalTo(maiorEsperado));
 	}
 	
 	
@@ -304,10 +317,17 @@ public class AvaliadorTest {
 		double terceiroMaiorEsperado = 300.0;
 		int quantidadeItensEsperado = 3;
 		
-		assertEquals(primeiroMaiorEsperado, tresMaiores.get(0).getValor(), 0.00001);
-		assertEquals(segundoMaiorEsperado, tresMaiores.get(1).getValor(), 0.00001);
-		assertEquals(terceiroMaiorEsperado, tresMaiores.get(2).getValor(), 0.00001);
-		assertEquals(quantidadeItensEsperado, tresMaiores.size());
+		//assertEquals(primeiroMaiorEsperado, tresMaiores.get(0).getValor(), 0.00001);
+		//assertEquals(segundoMaiorEsperado, tresMaiores.get(1).getValor(), 0.00001);
+		//assertEquals(terceiroMaiorEsperado, tresMaiores.get(2).getValor(), 0.00001);
+		//assertEquals(quantidadeItensEsperado, tresMaiores.size());
+		
+		//ATENÇÃO!!! Necessário sobreescrever os métodos equals e hashcode
+		//da classe Lance para que o assertThat saiba o que é a igualdade.
+		assertThat(tresMaiores.size(), equalTo(quantidadeItensEsperado));
+		assertThat(tresMaiores, hasItems(new Lance(jose, 500.0),
+										 new Lance(joao, 400.0),
+										 new Lance(maria, 300.0)));
 	}
 	
 	/**
@@ -335,9 +355,13 @@ public class AvaliadorTest {
 		double segundoMaiorEsperado = 200.0;
 		int quantidadeItensEsperado = 2;
 		
-		assertEquals(primeiroMaiorEsperado, tresMaiores.get(0).getValor(), 0.00001);
-		assertEquals(segundoMaiorEsperado, tresMaiores.get(1).getValor(), 0.00001);
-		assertEquals(quantidadeItensEsperado, tresMaiores.size());
+		//assertEquals(primeiroMaiorEsperado, tresMaiores.get(0).getValor(), 0.00001);
+		//assertEquals(segundoMaiorEsperado, tresMaiores.get(1).getValor(), 0.00001);
+		//assertEquals(quantidadeItensEsperado, tresMaiores.size());
+		
+		assertThat(tresMaiores.size(), equalTo(quantidadeItensEsperado));
+		assertThat(tresMaiores, hasItems(new Lance(joao, 400.0),
+										 new Lance(jose, 200.0)));
 
 	}
 	
@@ -378,6 +402,28 @@ public class AvaliadorTest {
 		leiloeiro.avalia(leilao);
 		
 	}
+	
+	/**
+	 * Testes com exceção. Utilizando o try-catch, maneira não recomendada.
+	 * 
+	 */	
+	@Test
+	public void naoDeveAvaliarLeiloesSemNenhumLanceDadoManeiraNaoRecomendada() {
+		//cenário
+		Leilao leilao = new CriadorDeLeilao().para("tablet XZ2 128Core").constroi();
+		try {
+			//ação
+			leiloeiro.avalia(leilao);
+			//leiloeiro.avalia(leilao, false);
+			fail(); //se não lançar a exceção, falha-se!
+		} catch (RuntimeException r) {
+			r.printStackTrace();
+		}
+		
+	}
+	
+	
+	
 	
 
 }

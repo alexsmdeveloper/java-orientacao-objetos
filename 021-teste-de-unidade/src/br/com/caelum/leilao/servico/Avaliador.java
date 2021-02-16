@@ -21,6 +21,8 @@ public class Avaliador {
 
 	private List<Lance> maiores; 
 	
+	private boolean acionaExcecaoAvaliaLeilao = true;
+	
 	public Avaliador() {
 		
 		System.out.println("Iniciando Avaliador....");
@@ -42,7 +44,7 @@ public class Avaliador {
 
 	public void avalia(Leilao leilao) {
 		
-		if (leilao.getLances().size() == 0) {
+		if (leilao.getLances().size() == 0 && this.acionaExcecaoAvaliaLeilao) {
 			throw new RuntimeException("Não é possível avaliar Leilão sem lances!");
 		}
 		
@@ -62,6 +64,16 @@ public class Avaliador {
 		
 		pegaOsMaioresNo(leilao);
 		
+	}
+	
+	/*
+	 * Método criado evitar lançar a exceção no método avalia.
+	 * A ideia é forçar o try-catch na classe teste para que a exceção não seja lançada
+	 * e cause um erro lá.
+	 */
+	public void avalia(Leilao leilao, boolean acionarExcecao) {
+		this.acionaExcecaoAvaliaLeilao = acionarExcecao;
+		avalia(leilao);
 	}
 	
 	private void pegaOsMaioresNo(Leilao leilao) {
